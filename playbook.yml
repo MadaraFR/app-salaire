@@ -1,0 +1,7 @@
+
+- name: installation de apache & mariadb
+  hosts: all
+  roles:
+    - prerequis
+    - apache
+    - mariadb

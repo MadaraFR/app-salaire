@@ -1,0 +1,9 @@
+---
+# vars file for nginx
+sites:
+  - konoha.local
+  - suna.local
+
+dossiers_sites_nginx :
+  - available
+  - enabled

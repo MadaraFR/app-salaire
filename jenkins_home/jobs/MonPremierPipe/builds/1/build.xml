@@ -1,0 +1,73 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-build plugin="workflow-job@1145.v7f2433caa07f">
+  <actions>
+    <hudson.model.CauseAction>
+      <causeBag class="linked-hash-map">
+        <entry>
+          <hudson.model.Cause_-UserIdCause>
+            <userId>issaga</userId>
+          </hudson.model.Cause_-UserIdCause>
+          <int>1</int>
+        </entry>
+      </causeBag>
+    </hudson.model.CauseAction>
+    <org.jenkinsci.plugins.workflow.libs.LibrariesAction plugin="workflow-cps-global-lib@552.vd9cc05b8a2e1">
+      <libraries/>
+    </org.jenkinsci.plugins.workflow.libs.LibrariesAction>
+    <org.jenkinsci.plugins.workflow.cps.EnvActionImpl plugin="workflow-cps@2648.va9433432b33c">
+      <env class="tree-map"/>
+    </org.jenkinsci.plugins.workflow.cps.EnvActionImpl>
+  </actions>
+  <queueId>3</queueId>
+  <timestamp>1644492470138</timestamp>
+  <startTime>1644492470140</startTime>
+  <result>FAILURE</result>
+  <duration>1080</duration>
+  <charset>UTF-8</charset>
+  <keepLog>false</keepLog>
+  <execution class="org.jenkinsci.plugins.workflow.cps.CpsFlowExecution">
+    <result>FAILURE</result>
+    <script>node{
+    stage(&apos;ping_pong&apos;){
+        &apos;ansible -m ping -i inventaire 192.168.136.131&apos;
+    }
+    stage(&apos;install_pkg&apos;){
+        &apos;ansible -i inventaire -m yum -a &quot;name=bash-completion state=present&quot;&apos;
+    }
+    stage(&apos;test_docker&apos;){
+        docker-version
+    }
+}</script>
+    <loadedScripts class="map"/>
+    <durabilityHint>MAX_SURVIVABILITY</durabilityHint>
+    <timings class="map">
+      <entry>
+        <string>flowNode</string>
+        <long>97650691</long>
+      </entry>
+      <entry>
+        <string>classLoad</string>
+        <long>92760762</long>
+      </entry>
+      <entry>
+        <string>run</string>
+        <long>576775323</long>
+      </entry>
+      <entry>
+        <string>parse</string>
+        <long>311895678</long>
+      </entry>
+      <entry>
+        <string>saveProgram</string>
+        <long>220324972</long>
+      </entry>
+    </timings>
+    <sandbox>true</sandbox>
+    <iota>19</iota>
+    <head>1:19</head>
+    <done>true</done>
+    <resumeBlocked>false</resumeBlocked>
+  </execution>
+  <completed>true</completed>
+  <checkouts class="hudson.util.PersistedList"/>
+</flow-build>

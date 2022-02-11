@@ -1,0 +1,32 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>apk add ansible  sshpass
+
+rm -rf /root/.ssh
+
+ssh-keygen -q -t rsa -N &apos;&apos; -f /root/.ssh/id_rsa
+
+sshpass -p &apos;P@ssw0rd78&apos; ssh-copy-id -o stricthostkeychecking=no root@192.168.136.131
+
+echo &quot;192.168.136.131&quot; &gt; inventaire
+
+ansible -m ping -i inventaire 192.168.136.131</command>
+      <configuredLocalRules/>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>
