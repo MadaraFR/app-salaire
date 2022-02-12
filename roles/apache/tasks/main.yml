@@ -9,12 +9,17 @@
      - php-mysql
     state: present
 
-- name: ajout du port 80 dans les port ouverts
+- name: ajout du port 80 dans les ports ouverts
   firewalld:
     service: http
     permanent: yes
     state: enabled
-    immediate: true    
+    immediate: true
+    
+- name: "recharge de firewalld pour la prise en compte de l'ouverture du port 80"
+  systemd:
+    name: firewalld
+    state: reloaded
 
 - name: droit d'ecriture sur dossier http
   file:
