@@ -1,13 +1,12 @@
 ---
-# tasks file for mariadb
-- name: installation du package mariadb
+- name: install mariadb package
   yum:
    name: 
     - mariadb
     - mariadb-server
    state: present
 
-- name: redémarrage du service mariadb
+- name: restart mariadb service
   systemd:
     name: mariadb
     enabled: yes
@@ -15,10 +14,3 @@
 
 - name: Start mysql_secure_installation
   command: 'echo "& y y Mypasswd Mypasswd y y y y" | ./usr/bin/mysql_secure_installation'
-
-- name: restart and enable systemd maridb service
-  systemd:
-    name: mariadb
-    enabled: yes
-    state: enabled
-
