@@ -9,36 +9,35 @@
      - php-mysql
     state: present
 
-- name: ajout du port 80 dans les ports ouverts
-  firewalld:
-    service: http
-    permanent: yes
-    state: enabled
-    immediate: true
-    
-- name: "recharge de firewalld pour la prise en compte de l'ouverture du port 80"
-  systemd:
-    name: firewalld
-    state: reloaded
+ - name: ajout du port 80 dans les ports ouverts
+   firewalld:
+     service: http
+     permanent: yes
+     state: enabled
+         
+ - name: "recharge de firewalld pour la prise en compte de l'ouverture du port 80"
+   systemd:
+     name: firewalld
+     state: reloaded
 
-- name: droit d'ecriture sur dossier http
-  file:
-   path: /var/www/html
-   state: directory
-   mode: 0755
+ - name: droit d'ecriture sur dossier http
+   file:
+    path: /var/www/html
+    state: directory
+    mode: 0755
    
-- name: "suppression du fichier index.html (afin d'être remplacé par le bon plus tard)"
-  file:
-    path: /var/www/html/index.html
-    state: absent
+ - name: "suppression du fichier index.html (afin d'être remplacé par le bon plus tard)"
+   file:
+     path: /var/www/html/index.html
+     state: absent
     
-- name: copie du contenu du répertoire app
-  copy:
-    src: app/
-    dest: /var/www/html
+ - name: copie du contenu du répertoire app
+   copy:
+     src: app/
+     dest: /var/www/html
 
-- name: redémarrage et activation du service Apache
-  systemd:
-   name: httpd
-   enabled: yes
-   state: restarted
+ - name: redémarrage et activation du service Apache
+   systemd:
+    name: httpd
+    enabled: yes
+    state: restarted
