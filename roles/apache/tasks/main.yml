@@ -1,46 +1,39 @@
-<<<<<<< HEAD
 ---
 # tasks file for apache
 #
- - name: Installation des packages pour apache
+ - name: Installation des packages pour Apache
    yum:
     name:
-      - httpd
-      - php
-      - php-mysql
+     - httpd
+     - php
+     - php-mysql
     state: present
 
- - name: redémarrage de apache
-   systemd:
-    name: httpd
-    enabled: yes
-    state: restarted
-
- - name: ajout du port http dans les ports ouverts
-   firewalld:
-    port: http
+- name: ajout du port 80 dans les port ouverts
+  firewalld:
+    service: http
     permanent: yes
     state: enabled
+    immediate: true    
 
- - name: recharger le firewalld
-   systemd:
-    service: firewalld
-    state: reloaded
-
- - name: droit d'ecriture sur dossier http
-   file:
+- name: droit d'ecriture sur dossier http
+  file:
    path: /var/www/html
    state: directory
    mode: 0755
    
-#- name: Supression du fichier index.html par défaut
-##  file:
-##   path: /var/www/html/index.html
-##   state: absent
-#   
- - name: copie app
-   copy:
+- name: "suppression du fichier index.html (afin d'être remplacé par le bon plus tard)"
+  file:
+    path: /var/www/html/index.html
+    state: absent
+    
+- name: copie du contenu du répertoire app
+  copy:
     src: app/
     dest: /var/www/html
-    
->>>>>>> b824066921f4babff0a0d47bad4e1f889e2618b4
+
+- name: redémarrage et activation du service Apache
+  systemd:
+   name: httpd
+   enabled: yes
+   state: restarted
